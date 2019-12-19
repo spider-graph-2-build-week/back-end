@@ -1,6 +1,7 @@
 dependencies:
   bcrypt: 3.0.7
   cors: 2.8.5
+  dotenv: 8.2.0
   express: 4.17.1
   helmet: 3.21.2
   jest: 24.9.0
@@ -1236,6 +1237,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-tUMXrxlExSW6U2EXiiKGSBVdYgtV8qlHL+C10TsW4PURY/ic+eaysnSkwB4kA/mBlCyy/IKDJ+Lc3wbWeaXtuQ==
+  /dotenv/8.2.0:
+    dev: false
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
   /duplexer3/0.1.4:
     dev: true
     resolution:
@@ -5154,6 +5161,7 @@ packages:
 specifiers:
   bcrypt: ^3.0.7
   cors: ^2.8.5
+  dotenv: ^8.2.0
   express: ^4.17.1
   helmet: ^3.21.2
   jest: ^24.9.0
