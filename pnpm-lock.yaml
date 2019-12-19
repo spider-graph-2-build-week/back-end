@@ -6,9 +6,9 @@ dependencies:
   helmet: 3.21.2
   jest: 24.9.0
   jsonwebtoken: 8.5.1
-  knex: 0.20.4
+  knex: 0.20.4_sqlite3@4.1.1
   morgan: 1.9.1
-  sqlite: 3.0.3
+  sqlite3: 4.1.1
   supertest: 4.0.2
 devDependencies:
   nodemon: 2.0.2
@@ -3000,7 +3000,7 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
-  /knex/0.20.4:
+  /knex/0.20.4_sqlite3@4.1.1:
     dependencies:
       bluebird: 3.7.2
       colorette: 1.1.0
@@ -3013,6 +3013,7 @@ packages:
       lodash: 4.17.15
       mkdirp: 0.5.1
       pg-connection-string: 2.1.0
+      sqlite3: 4.1.1
       tarn: 2.0.0
       tildify: 2.0.0
       uuid: 3.3.3
@@ -4435,21 +4436,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-NzNVhJDYpwceVVii8/Hu6DKfD2G+NrQHlS/V/qgv763EYudVwEcMQNxd2lh+0VrUByXN/oJkl5grOhYWvQUYiw==
-  /sql-template-strings/2.2.2:
-    dev: false
-    engines:
-      node: '>=4.0.0'
-    optional: true
-    resolution:
-      integrity: sha1-PxFQiiWt384hejBCqdMAwxk7lv8=
-  /sqlite/3.0.3:
-    dependencies:
-      sqlite3: 4.1.1
-    dev: false
-    optionalDependencies:
-      sql-template-strings: 2.2.2
-    resolution:
-      integrity: sha512-DpofdtBibbiOObtdADGZYE6bvnLpjRG4ut/MDTDau2nK40htOLj1E0c55aOkvbnRVqQ0ZPtjj7PJuKKyS0Ypww==
   /sqlite3/4.1.1:
     dependencies:
       nan: 2.14.0
@@ -5147,5 +5133,5 @@ specifiers:
   knex: ^0.20.4
   morgan: ^1.9.1
   nodemon: ^2.0.2
-  sqlite: ^3.0.3
+  sqlite3: ^4.1.1
   supertest: ^4.0.2
