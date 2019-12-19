@@ -3000,7 +3000,7 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
-  /knex/0.20.4_sqlite3@4.1.1:
+  /knex/0.20.4:
     dependencies:
       bluebird: 3.7.2
       colorette: 1.1.0
