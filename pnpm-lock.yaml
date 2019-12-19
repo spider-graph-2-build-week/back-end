@@ -1,5 +1,6 @@
 dependencies:
   bcrypt: 3.0.7
+  bcryptjs: 2.4.3
   cors: 2.8.5
   dotenv: 8.2.0
   express: 4.17.1
@@ -33,7 +34,7 @@ packages:
       debug: 4.1.1
       json5: 2.1.1
       lodash: 4.17.15
-      resolve: 1.14.0
+      resolve: 1.14.1
       semver: 5.7.1
       source-map: 0.5.7
     dev: false
@@ -659,6 +660,10 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-K5UglF9VQvBMHl/1elNyyFvAfOY9Bj+rpKrCSR9sFwcW8FywAYJSRwTURNej5TaAK2TEJkcJ6r6lh1YPmspx5Q==
+  /bcryptjs/2.4.3:
+    dev: false
+    resolution:
+      integrity: sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
   /binary-extensions/2.0.0:
     dev: true
     engines:
@@ -3083,7 +3088,7 @@ packages:
       is-plain-object: 2.0.4
       object.map: 1.0.1
       rechoir: 0.6.2
-      resolve: 1.14.0
+      resolve: 1.14.1
     dev: false
     engines:
       node: '>= 0.8'
@@ -3484,7 +3489,7 @@ packages:
   /normalize-package-data/2.5.0:
     dependencies:
       hosted-git-info: 2.8.5
-      resolve: 1.14.0
+      resolve: 1.14.1
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: false
@@ -4058,7 +4063,7 @@ packages:
       integrity: sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   /rechoir/0.6.2:
     dependencies:
-      resolve: 1.14.0
+      resolve: 1.14.1
     dev: false
     engines:
       node: '>= 0.10'
@@ -4202,12 +4207,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-IDEU2CrSxe2ejgQRs5ModeiJ6Xs=
-  /resolve/1.14.0:
+  /resolve/1.14.1:
     dependencies:
       path-parse: 1.0.6
     dev: false
     resolution:
-      integrity: sha512-uviWSi5N67j3t3UKFxej1loCH0VZn5XuqdNxoLShPcYPw6cUZn74K1VRj+9myynRX03bxIBEkwlkob/ujLsJVw==
+      integrity: sha512-fn5Wobh4cxbLzuHaE+nphztHy43/b++4M6SsGFC2gB8uYwf0C8LcarfCz1un7UTW8OFQg9iNjZ4xpcFVGebDPg==
   /ret/0.1.15:
     dev: false
     engines:
@@ -5160,6 +5165,7 @@ packages:
       integrity: sha512-2eehun/8ALW8TLoIl7MVaRUrg+yCnenu8B4kBlRxj3GJGDKU1Og7sMXPNm1BYyM1DOJmTZ4YeN/Nwxv+8XJsUA==
 specifiers:
   bcrypt: ^3.0.7
+  bcryptjs: ^2.4.3
   cors: ^2.8.5
   dotenv: ^8.2.0
   express: ^4.17.1

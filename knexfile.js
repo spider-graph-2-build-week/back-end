@@ -3,7 +3,7 @@ module.exports = {
 		client: 'sqlite3',
 		useNullAsDefault: true,
 		connection: {
-			filename: './database/testing-back-end.db3',
+			filename: './database/spider-graph-bw.db3',
 		},
 		pool: {
 			afterCreate: (connection, done) => {

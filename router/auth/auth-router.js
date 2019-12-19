@@ -9,10 +9,9 @@ const generateToken = user => {
 	const payload = {
 		subject: user.id,
 		username: user.username,
-		department: [user.department]
 	};
 	const options = {
-		expiresIn: '3m',
+		expiresIn: '1hr',
 	};
 
 	return jwt.sign(payload, secrets.jwtSecret, options)
