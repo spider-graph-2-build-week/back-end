@@ -45,6 +45,7 @@ const graphData = (dataset) => {
 		.innerJoin('data as d', function () {
 			this.on('ds.datasets_id', "=", "d.dataset_id").andOn('ds.datasets_id', '=', Number(dataset))
 		})
+		.groupBy("d.id")
 }
 
 // Add Dataset Labels per Dataset 
@@ -55,7 +56,7 @@ group by dt.dataset_label
 */
 const datasetLabels = (datasets) => {
 	return db("datasets as ds")
-		.select('*')
+		.select('ds.id', 'dt.datasets_id', 'dt.dataset_label')
 		.innerJoin('dataset as dt', function () {
 			this.on('ds.graphs_datasets_id', '=', 'dt.datasets_id').andOn('ds.graphs_datasets_id', '=', Number(datasets))
 		})

@@ -7,16 +7,13 @@ router.get('/:id', async (req, res) => {
 		const graphs = await Graphs.graphById(req.params.id);
 		for (let graph of graphs) {
 			graph.labels = await Graphs.graphLabels(graph.id);
-			graph.datasets = await Graphs.datasetLabels(graph.id)
-			for (let dataset of graph.datasets) {
-
-				return await Graphs.graphData(dataset.id);
-			}
-			return graph
+			graph.datasets = await Graphs.datasetLabels(graph.id).then(async datasets => {
+				for (let dataset of datasets) {
+					return dataset.data = await Graphs.graphData(dataset.id)
+				}
+			})
 		}
-		// const graphDatasets = await Graphs.graphDatasets(graph.id);
-		// const dataset = await Graphs.graphData(graph.id)
-		res.status(200).json({ message: "Get all graphs by user" })
+		res.status(200).json({ message: "Get all graphs by user", graphs })
 	} catch (e) {
 		res.status(500).json({ error: e.message })
 	}
