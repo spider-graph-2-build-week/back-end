@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const authRouter = require('../router/auth/auth-router.js');
 const usersRouter = require('../router/users/users-router.js');
+const graphsRouter = require('../router/graphs/graphs-router.js')
 
 const server = express();
 
@@ -15,6 +16,7 @@ server.use(cors());
 
 server.use('/api/auth', authRouter);
 server.use('/api/users', usersRouter);
+server.use('/api/graphs', graphsRouter);
 
 server.get('/', (req, res) => {
 	res.send(200);
