@@ -2,18 +2,21 @@ const router = require('express').Router();
 
 const Graphs = require('./graphs-model.js');
 
-router.get('/', async (req, res) => {
-	try {
-		const request = await Graphs.graphs();
-		res.status(200).json(request)
-	} catch (e) {
-		res.status(500).json({ error: e.message })
-	}
-})
 router.get('/:id', async (req, res) => {
 	try {
-		const request = await Graphs.graphById(req.params.id);
-		res.status(200).json(request)
+		const graphs = await Graphs.graphById(req.params.id);
+		for (let graph of graphs) {
+			graph.labels = await Graphs.graphLabels(graph.id);
+			graph.datasets = await Graphs.datasetLabels(graph.id)
+			for (let dataset of graph.datasets) {
+
+				return await Graphs.graphData(dataset.id);
+			}
+			return graph
+		}
+		// const graphDatasets = await Graphs.graphDatasets(graph.id);
+		// const dataset = await Graphs.graphData(graph.id)
+		res.status(200).json({ message: "Get all graphs by user" })
 	} catch (e) {
 		res.status(500).json({ error: e.message })
 	}

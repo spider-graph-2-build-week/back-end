@@ -25,7 +25,7 @@ and L.graphs_labels_id = 1
 
 const graphLabels = (id) => {
 	return db('labels as l')
-		.select("l.id", "l.label", "l.graphs_labels_id")
+		.select("l.label")
 		.innerJoin('graphs as g', function () {
 			this.on('l.graphs_labels_id', "=", "g.id").andOn('l.graphs_labels_id', '=', Number(id))
 		})
@@ -39,11 +39,11 @@ inner join data as d on ds.datasets_id = d.dataset_id
 and ds.datasets_id = 2
 group by d.id
 */
-const graphData = (location) => {
+const graphData = (dataset) => {
 	return db('dataset as ds')
 		.select("d.id", 'd.dataset_id', 'd.value')
 		.innerJoin('data as d', function () {
-			this.on('ds.datasets_id', "=", "d.dataset_id").andOn('ds.datasets_id', '=', Number(location))
+			this.on('ds.datasets_id', "=", "d.dataset_id").andOn('ds.datasets_id', '=', Number(dataset))
 		})
 }
 
@@ -53,22 +53,27 @@ select ds.graphs_datasets_id, dt.datasets_id, dt.dataset_label from datasets as 
 inner join dataset as dt on ds.graphs_datasets_id = dt.datasets_id and ds.graphs_datasets_id = 1
 group by dt.dataset_label
 */
-
-
+const datasetLabels = (datasets) => {
+	return db("datasets as ds")
+		.select('*')
+		.innerJoin('dataset as dt', function () {
+			this.on('ds.graphs_datasets_id', '=', 'dt.datasets_id').andOn('ds.graphs_datasets_id', '=', Number(datasets))
+		})
+}
 
 // Linking the Datasets to Graphs by ID
+/*
+select * from datasets as d 
+inner join graphs as g on d.graphs_datasets_id = g.id and d.graphs_datasets_id = 2
+*/
 const graphDatasets = (id) => {
 	return db('datasets as d')
 		.select('*')
 		.innerJoin('graphs as g', function () {
-			this.on('d.graphs_datasets_id', "=", "g.id").andOn('l.graphs_datasets_id', "=", Number(id))
+			this.on('d.graphs_datasets_id', "=", "g.id").andOn('d.graphs_datasets_id', "=", Number(id))
 		})
 }
 
-const graphs = (id) => {
-	return db('graphs')
-}
-
 module.exports = {
-	graphs, graphById, graphLabels, graphDatasets
+	graphById, graphLabels, graphDatasets, datasetLabels, graphData
 }
