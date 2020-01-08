@@ -7,11 +7,11 @@ router.get('/:id', async (req, res) => {
 		const graphs = await Graphs.graphById(req.params.id);
 		for (let graph of graphs) {
 			graph.labels = await Graphs.graphLabels(graph.id);
-			graph.datasets = await Graphs.datasetLabels(graph.id).then(async datasets => {
-				for (let dataset of datasets) {
-					return dataset.data = await Graphs.graphData(dataset.id)
-				}
-			})
+			graph.datasets = await Graphs.graphDatasets(graph.id);
+			for (let dataset of graph.datasets) {
+				// console.log(dataset.data = "Dummy Data")
+				dataset.data = await Graphs.graphData(dataset.id)
+			}
 		}
 		res.status(200).json({ message: "Get all graphs by user", graphs })
 	} catch (e) {

@@ -70,9 +70,9 @@ exports.down = function (knex) {
 };
 
 
-/*
-Database Shape:
-{
+
+
+const dbShape = {
 	id: 1,
 	username: '',
 	firstName: '',
@@ -86,13 +86,13 @@ Database Shape:
 			datasets: [
 				{
 					id: 1,
-					label: "",
-					data: [1,2,3,4]
+					dataset_label: "",
+					data: [1, 2, 3, 4]
 				},
 				{
 					id: 2,
-					label: "",
-					data: [5,6,7,8]
+					dataset_label: "",
+					data: [5, 6, 7, 8]
 				}
 			]
 		},
@@ -105,16 +105,14 @@ Database Shape:
 				{
 					id: 1,
 					label: "",
-					data: [1,2,3,4]
+					data: [1, 2, 3, 4]
 				},
 				{
 					id: 2,
 					label: "",
-					data: [5,6,7,8]
+					data: [5, 6, 7, 8]
 				}
 			]
 		}
 	]
 }
-
-*/
