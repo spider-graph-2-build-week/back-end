@@ -25,7 +25,7 @@ and L.graphs_labels_id = 1
 
 const graphLabels = (id) => {
 	return db('labels as l')
-		.select("l.label")
+		.select("l.id", "l.label", "l.graphs_labels_id")
 		.innerJoin('graphs as g', function () {
 			this.on('l.graphs_labels_id', "=", "g.id").andOn('l.graphs_labels_id', '=', Number(id))
 		})
@@ -41,7 +41,7 @@ group by d.id
 */
 const graphData = (dataset) => {
 	return db('dataset as ds')
-		.select('d.value')
+		.select('*')
 		.innerJoin('data as d', function () {
 			this.on('ds.datasets_id', "=", "d.dataset_id").andOn('ds.datasets_id', '=', Number(dataset))
 		})
@@ -76,6 +76,71 @@ const graphDatasets = (id) => {
 		})
 }
 
+const graphs = async (userid) => {
+	try {
+		const graphs = await graphById(userid);
+		for (let graph of graphs) {
+			graph.labels = await graphLabels(graph.id);
+			graph.datasets = await graphDatasets(graph.id);
+			for (let dataset of graph.datasets) {
+				dataset.data = await graphData(dataset.id)
+			}
+			return graphs
+		}
+	} catch (e) {
+		console.log(e.message)
+	}
+}
+
+const add = (userid, graph) => {
+	return db('graphs').insert(graph).then(graphs => {
+		return graphs(userid)
+	})
+}
+
+/*insert into graphs (title, description, user_id) ✅
+values ( 'Title of Graph 5', 'This is a description of 5', '2'); */
+
+const addToGraphs = (graph) => {
+	return db('graphs').insert(graph)
+}
+
+/*insert into labels (label, graphs_labels_id) ✅
+values ('Label 11', '3') */
+
+const addToLabels = (label) => {
+	return db('labels').insert(label)
+}
+/*insert into datasets (graphs_datasets_id)
+values ('3');*/
+
+const addToDatasets = (datasetid) => {
+	return db('datasets').insert(datasetid)
+}
+/*insert into dataset (dataset_label, datasets_id)
+values ('Dataset Label 5', '2')*/
+
+const addLabelToDataset = (datasetLabel) => {
+	return db('dataset').insert(datasetLabel)
+}
+/*insert into data (value, dataset_id)
+values ('33', '3')*/
+
+const addDataToDataset = (data) => {
+	return db('dataset').insert(data)
+}
+const update = (userid, graphid, changes) => {
+	return db('graphs').where({ graphid }).update(changes).then(() => {
+		return graphs(userid)
+	})
+}
+
+const remove = (userid, graphid) => {
+	return db('graphs').where({ graphid }).del().then(() => {
+		return graphs(userid)
+	})
+}
+
 module.exports = {
-	graphById, graphLabels, graphDatasets, datasetLabels, graphData
+	graphs, graphById, graphLabels, graphDatasets, datasetLabels, graphData, add, update, remove, addToDatasets, addToGraphs, addToLabels, addLabelToDataset, addDataToDataset
 }
