@@ -19,8 +19,8 @@ exports.up = function (knex) {
 		})
 		.createTable('labels', column => {
 			column.increments();
-			column.string('label').notNullable().unique()
-			column.integer('graphs_labels_id')
+			column.string('label').notNullable()
+			column.integer('graph_labels_id')
 				.unsigned()
 				.notNullable()
 				.references('graphs.id')
@@ -29,20 +29,11 @@ exports.up = function (knex) {
 		})
 		.createTable('datasets', column => {
 			column.increments();
-			column.integer('graphs_datasets_id')
+			column.string('dataset_label').notNullable()
+			column.integer('graph_datasets_id')
 				.unsigned()
 				.notNullable()
 				.references('graphs.id')
-				.onDelete('CASCADE')
-				.onUpdate('CASCADE')
-		})
-		.createTable('dataset', column => {
-			column.increments();
-			column.string('dataset_label').unique().notNullable()
-			column.integer('datasets_id')
-				.unsigned()
-				.notNullable()
-				.references('datasets.id')
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE')
 		})
@@ -52,7 +43,7 @@ exports.up = function (knex) {
 			column.integer('dataset_id')
 				.unsigned()
 				.notNullable()
-				.references('dataset.id')
+				.references('datasets.id')
 				.onDelete('CASCADE')
 				.onUpdate('CASCADE')
 		})
@@ -62,7 +53,6 @@ exports.up = function (knex) {
 exports.down = function (knex) {
 	return knex.schema
 		.dropTableIfExists('data')
-		.dropTableIfExists('dataset')
 		.dropTableIfExists('datasets')
 		.dropTableIfExists('labels')
 		.dropTableIfExists('graphs')
@@ -82,16 +72,16 @@ const dbShape = {
 			id: 1,
 			title: '',
 			description: '',
-			labels: ["", ""],
+			labels: ["ONe", "tWo"],
 			datasets: [
 				{
 					id: 1,
-					dataset_label: "",
+					dataset_label: "ONe",
 					data: [1, 2, 3, 4]
 				},
 				{
 					id: 2,
-					dataset_label: "",
+					dataset_label: "tWo",
 					data: [5, 6, 7, 8]
 				}
 			]
@@ -116,3 +106,4 @@ const dbShape = {
 		}
 	]
 }
+

@@ -14,3 +14,4 @@ exports.seed = function (knex) {
     { id: 12, dataset_id: 2, value: 75 },
   ])
 };
+

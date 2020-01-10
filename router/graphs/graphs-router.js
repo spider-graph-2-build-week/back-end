@@ -2,6 +2,7 @@ const router = require('express').Router();
 
 const Graphs = require('./graphs-model.js');
 
+// ! Operational
 router.get('/:id', async (req, res) => {
 	try {
 		const item = await Graphs.graphs(req.params.id)
@@ -11,35 +12,48 @@ router.get('/:id', async (req, res) => {
 	}
 })
 
+// ! Non-operational
 router.post('/:userid', async (req, res) => {
 	const { userid } = req.params
 	const graph = {
+		user_id: userid,
 		title: req.body.title,
-		description: req.body.description
+		description: req.body.description,
 	}
 	try {
-		req.body.labels.map(async label => {
-			console.log(label)
-			await Graphs.addToLabels(label)
-		})
-		req.body.datasets.map(async datasetObj => {
-			console.log(datasetObj)
-			const label = {
-				dataset_label: datasetObj.dataset_label
-			}
-			await Graphs.addLabelToDataset(label)
-			if (datasetObj.data.length > 0) {
-				datasetObj.data.map(async dataItem => {
-					console.log(dataItem)
-					await Graphs.addDataToDataset(dataItem)
-				})
-			}
-
-		})
-		const item = await Graphs.add(userid, req.body)
-		res.status(200).json(item)
+		await Graphs.addToGraphs(graph)
 	} catch (e) {
-		res.status(500).json({ error: e.message })
+		res.status(500).json({ line: '27', error: e.message })
+	}
+
+	req.body.labels.map(async label => {
+		try {
+			await Graphs.addToLabels(label)
+		} catch (e) {
+			res.status(500).json({ line: '33', error: e.message })
+		}
+	})
+	req.body.datasets.map(dataset => {
+		if (dataset.data.length > 0) {
+			dataset.data.map(async dataItem => {
+				// console.log("graphs-router line 41", dataItem)
+				try {
+					// console.log('dataItem', dataItem)
+					// This is failing saying not null data.dataset_id
+					await Graphs.addDataToDataset(dataItem, dataItem.id)
+				} catch (e) {
+					res.status(500).json({ line: '45', error: e.message })
+				}
+			})
+		}
+	})
+
+	try {
+		// console.log("This is req.body line 50", req.body)
+		const item = await Graphs.graphs(userid)
+		res.status(200).json({ message: "Successful", item })
+	} catch (e) {
+		res.status(500).json({ line: '57', error: e.message })
 	}
 })
 router.put('/:userid/:graphid', async (req, res) => {
@@ -53,10 +67,10 @@ router.put('/:userid/:graphid', async (req, res) => {
 
 	}
 })
-router.delete('/:userid/:graphid', async (req, res) => {
-	const { userid, graphid } = req.params
+router.delete('/:userid/:id', async (req, res) => {
+	const { id, userid } = req.params
 	try {
-		const item = await Graphs.remove(userid, graphid)
+		const item = await Graphs.remove(id, userid)
 		res.status(200).json(item)
 	} catch (e) {
 		res.status(500).json({ error: e.message })
@@ -85,3 +99,35 @@ router.get('/:id', async (req, res) => {
     }
 });
 */
+
+// // ! Graph Table
+// {
+// 	id
+// 	user_id
+// 	title
+// 	description
+// }
+
+// // ! Labels Table
+// {
+// 	id
+// 	graph_labels_id
+// 	label
+// }
+// // ! Datasets Table
+// {
+// 	id
+// 	graph_datasets_id
+// }
+// // ! Dataset Table
+// {
+// 	id
+// 	datasets_id
+// 	dataset_label
+// }
+// // ! Data
+// {
+// 	id
+// 	dataset_id
+// 	value
+// }
