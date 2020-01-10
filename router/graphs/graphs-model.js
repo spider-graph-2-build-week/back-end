@@ -145,8 +145,8 @@ const update = (userid, graphid, changes) => {
 
 // ? Testing required
 
-const remove = (userid, graphid) => {
-	return db('graphs').where({ graphid }).del().then(() => {
+const remove = (id, userid) => {
+	return db('graphs').where({ id }).del().then(() => {
 		return graphs(userid)
 	})
 }
