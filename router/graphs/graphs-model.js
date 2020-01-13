@@ -125,10 +125,6 @@ const addToDatasets = (datasetid) => {
 	})
 }
 
-// ! Not needed but save just in case
-/*insert into dataset (dataset_label, datasets_id)
-values ('Dataset Label 5', '2')*/
-
 
 /*insert into data (value, dataset_id)
 values ('33', '3')*/

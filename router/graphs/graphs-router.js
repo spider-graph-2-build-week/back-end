@@ -37,7 +37,7 @@ router.post('/:userid', async (req, res) => {
 			res.status(500).json({ line: '33', error: e.message })
 		}
 	})
-	req.body.datasets.map(async (dataset, datasetindex) => {
+	req.body.datasets.map(async (dataset) => {
 		const datasetObj = {
 			graph_datasets_id: graph.id,
 			dataset_label: dataset.dataset_label
