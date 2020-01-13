@@ -19,7 +19,7 @@ server.use('/api/users', usersRouter);
 server.use('/api/graphs', graphsRouter);
 
 server.get('/', (req, res) => {
-	res.send(200);
+	res.sendStatus(200);
 });
 
 module.exports = server;
