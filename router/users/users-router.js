@@ -1,11 +1,12 @@
 const router = require('express').Router();
 
 const Users = require('./users-model.js');
+const Graphs = require('../graphs/graphs-model.js')
 const restricted = require('../../api/middleware/restricted-middleware.js');
 
-router.get('/', restricted, async (req, res) => {
+router.get('/:userid', restricted, async (req, res) => {
 	try {
-		const request = await Users.find();
+		const request = await Graphs.graphs(req.params.userid);
 		res.status(200).json(request)
 	} catch (e) {
 		res.status(500).json({ error: e.message })
