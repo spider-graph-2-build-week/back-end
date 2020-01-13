@@ -95,7 +95,7 @@ const graphs = async (userid) => {
 }
 
 // ? Testing required
-const add = (userid, graph) => {
+const add = (graph) => {
 	console.log("Graphs-model line 90", graph)
 	return db('graphs').insert(graph)
 }
@@ -120,7 +120,9 @@ values ('3');*/
 
 // ? Testing required
 const addToDatasets = (datasetid) => {
-	return db('datasets').insert(datasetid)
+	return db('datasets').insert(datasetid).then((ids) => {
+		return db('datasets').select({ id: ids[0] })
+	})
 }
 
 // ! Not needed but save just in case
@@ -131,8 +133,9 @@ values ('Dataset Label 5', '2')*/
 /*insert into data (value, dataset_id)
 values ('33', '3')*/
 
-// ? Testing required
+// ? Testing required 
 const addDataToDataset = (data) => {
+	console.log("Data from line 136 of Graphs Model", data)
 	return db('data').insert(data)
 }
 

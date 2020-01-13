@@ -16,35 +16,46 @@ router.get('/:id', async (req, res) => {
 router.post('/:userid', async (req, res) => {
 	const { userid } = req.params
 	const graph = {
+		id: Date.now(),
 		user_id: userid,
 		title: req.body.title,
 		description: req.body.description,
 	}
 	try {
+		// console.log("Line 24 Graph", graph)
 		await Graphs.addToGraphs(graph)
 	} catch (e) {
 		res.status(500).json({ line: '27', error: e.message })
 	}
 
 	req.body.labels.map(async label => {
+		label.graph_labels_id = graph.id
 		try {
 			await Graphs.addToLabels(label)
+			// console.log("Line 32 Label", label)
 		} catch (e) {
 			res.status(500).json({ line: '33', error: e.message })
 		}
 	})
-	req.body.datasets.map(dataset => {
-		if (dataset.data.length > 0) {
-			dataset.data.map(async dataItem => {
-				// console.log("graphs-router line 41", dataItem)
+	req.body.datasets.map(async (dataset, datasetindex) => {
+		const datasetObj = {
+			graph_datasets_id: graph.id,
+			dataset_label: dataset.dataset_label
+		}
+		try {
+			const id = await Graphs.addToDatasets(datasetObj)
+			dataset.data.map(async (dataItem) => {
+				// Dataset_id must exist in the database. The numbers in the database are all random and not accessible from here.
+				dataItem.dataset_id = id[0].id
+				// console.log("dataItem: Fields required id, value, dataset_id ", dataItem)
 				try {
-					// console.log('dataItem', dataItem)
-					// This is failing saying not null data.dataset_id
-					await Graphs.addDataToDataset(dataItem, dataItem.id)
+					await Graphs.addDataToDataset(dataItem)
 				} catch (e) {
-					res.status(500).json({ line: '45', error: e.message })
+					res.status(500).json({ line: '57', error: e.message })
 				}
 			})
+		} catch (e) {
+			res.status(500).json({ line: '48', error: e.message })
 		}
 	})
 
@@ -53,7 +64,7 @@ router.post('/:userid', async (req, res) => {
 		const item = await Graphs.graphs(userid)
 		res.status(200).json({ message: "Successful", item })
 	} catch (e) {
-		res.status(500).json({ line: '57', error: e.message })
+		res.status(500).json({ line: '67', error: e.message })
 	}
 })
 router.put('/:userid/:graphid', async (req, res) => {
