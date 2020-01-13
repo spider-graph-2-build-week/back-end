@@ -8,12 +8,12 @@ The following endpoints are available for use. This backend is designed to work 
 
 | Request | Endpoint                   | Requires                          | Returns           |
 | ------- | -------------------------- | --------------------------------- | ----------------- |
-| GET     | `/graphs/:userid`          | N/A                               | All users' graphs |
-| POST    | `/graphs/:userid`          | Full Object (See below)           | All users' graphs |
+| GET     | `/graphs/:userid`          | N/A                               | All graphs |
+| POST    | `/graphs/:userid`          | Full Object (See below)           | All graphs |
 | DEL     | `/graphs/:userid/:graphid` | N/A                               | Remaining graphs  |
 | POST    | `/auth/register`           | Username and Password             | Confirmation      |
 | POST    | `/auth/login`              | Username and Password             | Token             |
-| GET     | `/users/:userid`           | Authorization: Token (In headers) | All Users' graphs |
+| GET     | `/users/:userid`           | Authorization: Token (In headers) | All graphs |
 
 ### Full Object Required by Endpoints
 
