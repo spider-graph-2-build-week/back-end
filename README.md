@@ -1,8 +1,8 @@
 # Welcome to Spider Graph.
 
-The following endpoints are available for use. This backend is designed to work with the data structure from [https://www.chartjs.org/docs/latest/charts/radar.html]
+The following endpoints are available for use. This backend is designed to work with the data structure from https://www.chartjs.org/docs/latest/charts/radar.html
 
-### Base URL = [https://spider-graph-bw.herokuapp.com/api]
+### Base URL: https://spider-graph-bw.herokuapp.com/api
 
 ### How to use:
 
@@ -92,4 +92,4 @@ The following endpoints are available for use. This backend is designed to work 
 
 ### Todo:
 
-Requires similar functionality as the ADD, but is not operational.
+Update requires similar functionality as the ADD, but is not operational.
