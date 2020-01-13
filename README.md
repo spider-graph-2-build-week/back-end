@@ -1,6 +1,6 @@
 # Welcome to Spider Graph.
 
-The following endpoints are available for use. This backend is designed to work with the data structure from https://www.chartjs.org/docs/latest/charts/radar.html
+The following endpoints are available for use. This backend is designed to work with the data structure from https://www.chartjs.org/docs/latest/charts/radar.html. Traversy video on chart.js https://www.youtube.com/watch?v=Ly-9VTXJlnA
 
 ### Base URL: https://spider-graph-bw.herokuapp.com/api
 
